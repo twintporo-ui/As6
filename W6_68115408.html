@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOIR CAFÉ — 68115408 ธนภัท วัฒนผลมงคล</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Thai:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --bg:       #0d0d0d;
+      --bg2:      #141414;
+      --bg3:      #1a1a1a;
+      --gold:     #c9a84c;
+      --gold-lt:  #e8c97a;
+      --cream:    #f5f0e8;
+      --muted:    #7a7a7a;
+      --border:   rgba(201,168,76,0.18);
+      --radius:   12px;
+      --transition: 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'IBM Plex Sans Thai', sans-serif;
+      background: var(--bg);
+      color: var(--cream);
+      line-height: 1.7;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ===== SECTION 1: HERO BANNER ===== */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(13,13,13,0.3) 0%, rgba(13,13,13,0.75) 60%, var(--bg) 100%),
+        url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=1600&q=80') center/cover no-repeat;
+    }
+
+    /* grain overlay */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      z-index: 1;
+      animation: fadeUp 1.2s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(52px, 9vw, 110px);
+      line-height: 0.95;
+      font-weight: 700;
+      letter-spacing: -2px;
+      margin-bottom: 28px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      max-width: 420px;
+      margin: 0 auto 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 40px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: all var(--transition);
+      cursor: pointer;
+      background: transparent;
+    }
+
+    .btn:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    .btn-filled {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    .btn-filled:hover {
+      background: var(--gold-lt);
+      border-color: var(--gold-lt);
+    }
+
+    /* ===== SECTION 2: HEADING & DESCRIPTION ===== */
+    #about {
+      padding: 100px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    h2 em { font-style: italic; color: var(--gold); }
+
+    .about-text p {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 16px;
+      font-family: 'IBM Plex Sans Thai', sans-serif;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: var(--radius);
+      filter: grayscale(20%);
+      border: 1px solid var(--border);
+    }
+
+    .about-badge {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: var(--gold);
+      color: var(--bg);
+      padding: 20px 24px;
+      border-radius: var(--radius);
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .about-badge span {
+      display: block;
+      font-family: 'IBM Plex Sans Thai', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      font-weight: 400;
+      margin-top: 4px;
+    }
+
+    /* ===== SECTION 3: GALLERY ===== */
+    #gallery {
+      padding: 100px 60px;
+      background: var(--bg2);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: var(--radius);
+      cursor: pointer;
+    }
+
+    .gallery-item:first-child {
+      grid-row: span 2;
+      aspect-ratio: unset;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(30%) brightness(0.85);
+      transition: all 0.6s ease;
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,13,13,0.85) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+
+    .gallery-overlay p {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: var(--cream);
+      transform: translateY(10px);
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      filter: grayscale(0%) brightness(1);
+      transform: scale(1.06);
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-item:hover .gallery-overlay p {
+      transform: translateY(0);
+    }
+
+    /* ===== SECTION 4: CONTENT CARDS ===== */
+    #menu {
+      padding: 100px 60px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+      border-color: var(--gold);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      filter: brightness(0.85);
+      transition: filter var(--transition);
+    }
+
+    .card:hover .card-img { filter: brightness(1); }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-tag {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-family: 'IBM Plex Sans Thai', sans-serif;
+    }
+
+    .card-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .card-btn {
+      display: inline-block;
+      padding: 8px 20px;
+      border: 1px solid var(--border);
+      color: var(--cream);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all var(--transition);
+    }
+
+    .card-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ===== SECTION 6: PLUS ONE — Contact Form ===== */
+    #contact {
+      padding: 100px 60px;
+      background: var(--bg2);
+    }
+
+    .contact-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-form {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: left;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--cream);
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      font-family: 'IBM Plex Sans Thai', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color var(--transition);
+      width: 100%;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .contact-form textarea { height: 130px; resize: vertical; }
+
+    .contact-form button {
+      align-self: center;
+      padding: 14px 48px;
+      background: var(--gold);
+      border: none;
+      color: var(--bg);
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background var(--transition);
+      font-family: 'IBM Plex Sans Thai', sans-serif;
+    }
+
+    .contact-form button:hover { background: var(--gold-lt); }
+
+    /* ===== SECTION 5: FOOTER ===== */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 60px 60px 40px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: var(--gold);
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 260px;
+      font-family: 'IBM Plex Sans Thai', sans-serif;
+    }
+
+    .footer-heading {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color var(--transition);
+      font-family: 'IBM Plex Sans Thai', sans-serif;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-social {
+      display: flex;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .social-pill {
+      padding: 8px 18px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: all var(--transition);
+      letter-spacing: 1px;
+    }
+
+    .social-pill:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+      font-family: 'IBM Plex Sans Thai', sans-serif;
+    }
+
+    .student-badge {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { gap: 20px; }
+
+      #about {
+        grid-template-columns: 1fr;
+        padding: 80px 24px;
+        gap: 40px;
+      }
+
+      .about-visual { display: none; }
+
+      #gallery, #menu, #contact, footer {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-item:first-child { grid-row: span 1; }
+
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      nav { padding: 14px 16px; }
+      .nav-links { display: none; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Noir</div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- SECTION 1: HERO BANNER -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Bangkok · Est. 2025</p>
+      <h1 class="hero-title">
+        NOIR<br><em>Café</em>
+      </h1>
+      <p class="hero-subtitle">สัมผัสความเงียบสงบในทุกจิบ — คาเฟ่มืดที่เปิดโลกใบใหม่ของรสชาติ</p>
+      <a href="#menu" class="btn btn-filled">สำรวจเมนู</a>
+    </div>
+  </section>
+
+  <!-- SECTION 2: HEADING & DESCRIPTION -->
+  <section id="about">
+    <div class="about-text">
+      <p class="section-tag">Our Story</p>
+      <h2>กาแฟที่ดี<br>เริ่มต้นจาก<em>ความมืด</em></h2>
+      <p>NOIR Café เกิดขึ้นจากความเชื่อที่ว่า กาแฟที่ดีต้องการความนิ่งและสมาธิ เหมือนการคั่วเมล็ดที่ต้องการความแม่นยำในทุกวินาที</p>
+      <p>เราคัดสรรเมล็ดกาแฟ Single Origin จากไร่ในเชียงราย ดอยอ่างขาง และอำเภอปางมะผ้า มาบรรจงคั่วในร้านทุกเช้า</p>
+      <a href="#about" class="btn" style="margin-top:8px">รู้จักเราเพิ่มเติม</a>
+    </div>
+    <div class="about-visual">
+      <img class="about-img"
+        src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80"
+        alt="Barista making coffee">
+      <div class="about-badge">
+        5★
+        <span>Specialty Coffee</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: GALLERY -->
+  <section id="gallery">
+    <div class="section-header">
+      <p class="section-tag">Gallery</p>
+      <h2>บรรยากาศของ<em>เรา</em></h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&q=80" alt="Cafe interior">
+        <div class="gallery-overlay"><p>Interior Mood</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80" alt="Coffee cup">
+        <div class="gallery-overlay"><p>Signature Latte</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80" alt="Cafe table">
+        <div class="gallery-overlay"><p>Corner Table</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=600&q=80" alt="Pastry">
+        <div class="gallery-overlay"><p>Daily Pastry</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80" alt="Cold brew">
+        <div class="gallery-overlay"><p>Cold Brew</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?w=600&q=80" alt="Night view">
+        <div class="gallery-overlay"><p>Night Vibes</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: CONTENT CARDS -->
+  <section id="menu">
+    <div class="section-header">
+      <p class="section-tag">Signature Menu</p>
+      <h2>เมนู<em>แนะนำ</em></h2>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <img class="card-img"
+          src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&q=80"
+          alt="Noir Espresso">
+        <div class="card-body">
+          <p class="card-tag">Espresso</p>
+          <h3 class="card-title">Noir Black</h3>
+          <p class="card-desc">Double shot espresso จากเมล็ดอาราบิกาคั่วเข้ม กลิ่นดาร์กช็อกโกแลต</p>
+          <p class="card-price">฿85</p>
+          <a href="#menu" class="card-btn">สั่งเลย</a>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img"
+          src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&q=80"
+          alt="Gold Latte">
+        <div class="card-body">
+          <p class="card-tag">Signature</p>
+          <h3 class="card-title">Gold Latte</h3>
+          <p class="card-desc">Latte ผสมขมิ้นและน้ำผึ้งดอยป่า กลิ่นหอมอบอุ่น</p>
+          <p class="card-price">฿120</p>
+          <a href="#menu" class="card-btn">สั่งเลย</a>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img"
+          src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=80"
+          alt="Dark Croissant">
+        <div class="card-body">
+          <p class="card-tag">Pastry</p>
+          <h3 class="card-title">Dark Croissant</h3>
+          <p class="card-desc">ครัวซองต์ชาร์โคลอบสดทุกเช้า กรอบนอก นุ่มใน</p>
+          <p class="card-price">฿95</p>
+          <a href="#menu" class="card-btn">สั่งเลย</a>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img"
+          src="https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=400&q=80"
+          alt="Midnight Cold Brew">
+        <div class="card-body">
+          <p class="card-tag">Cold Brew</p>
+          <h3 class="card-title">Midnight Brew</h3>
+          <p class="card-desc">Cold brew แช่ 18 ชั่วโมง ผสม coconut water เย็นชื่นใจ</p>
+          <p class="card-price">฿130</p>
+          <a href="#menu" class="card-btn">สั่งเลย</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: PLUS ONE — Contact -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="section-tag">Plus One — Contact</p>
+      <h2>จองโต๊ะหรือ<em>ติดต่อ</em>เรา</h2>
+      <p style="color:var(--muted); font-size:14px; margin-top:8px;">เปิดทุกวัน 08:00 – 22:00 น. · สาทร กรุงเทพฯ</p>
+      <div class="contact-form">
+        <input type="text" placeholder="ชื่อของคุณ">
+        <input type="email" placeholder="อีเมล">
+        <input type="tel" placeholder="เบอร์โทรศัพท์">
+        <textarea placeholder="ข้อความหรือต้องการจองโต๊ะ..."></textarea>
+        <button type="submit">ส่งข้อความ</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">NOIR</div>
+        <p class="footer-tagline">สัมผัสความเข้มข้นในทุกจิบ — เปิดทุกวัน 08:00–22:00 น. ถนนสาทร กรุงเทพฯ</p>
+        <div class="footer-social" style="margin-top:20px;">
+          <a href="#" class="social-pill">Instagram</a>
+          <a href="#" class="social-pill">Facebook</a>
+          <a href="#" class="social-pill">Line OA</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-heading">Navigate</p>
+        <ul class="footer-links">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-heading">Contact</p>
+        <ul class="footer-links">
+          <li><a href="#">noircafe@email.com</a></li>
+          <li><a href="#">02-XXX-XXXX</a></li>
+          <li><a href="#">ถนนสาทร กรุงเทพฯ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 NOIR Café. All rights reserved.</span>
+      <span class="student-badge">68115408 ธนภัท วัฒนผลมงคล · ICT12267</span>
+    </div>
+  </footer>
+
+</body>
+</html>
